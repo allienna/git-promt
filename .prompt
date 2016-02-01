@@ -1,0 +1,18 @@
+#!/bin/sh                                                                                                                                                               
+PROMPT_COMMAND=updatePrompt
+
+updatePrompt() {
+
+branch=`git branch --no-color 2>/dev/null | grep '*' | sed 's/^\* //'`
+if [ "$branch" != "" ]
+then
+        PS1='\[\033[01;34m\]\W\[\033[01;31m\] GIT[$branch]\[\033[00m\]\$ '
+    echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD} -- $branch\007"
+else
+        PS1='\[\033[01;34m\]\W\[\033[00m\]\$ '
+    echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"
+fi
+
+
+}
+
